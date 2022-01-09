@@ -1,10 +1,16 @@
+const dotenv = require('dotenv');
 const express = require('express');
 const app = express();
 
-// require('./config/process.env');
-PORT = process.env.PORT || 3005;
 
-app.use(require('./routes/auth'));
+
+// dotenv.config({path: './config.env'});
+//const PORT = config.env.PORT || 3030;
+const PORT = 3030;
+console.log(PORT)
+
+app.use(express.json())
+app.use('/api/user', require('./routes/auth'));
 require('./db/connect');
 
 

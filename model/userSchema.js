@@ -6,16 +6,21 @@ const requireSchema = mongoose.Schema({
 
 const userSchema = new mongoose.Schema({
     name : requireSchema,
-    email:  requireSchema,
+    email: requireSchema, 
     phone: {
         types: Number,
        
     },
     password: requireSchema,
+    cPassword: requireSchema,
     villageORcity : requireSchema,
-    district: requireSchema
+    district: requireSchema,
+    data: {
+        type: Date,
+        default: Date.now
+    }
 });
 
-const user = new mongoose.model('user', 'userSchema');
+const User = mongoose.model('user', userSchema);
 
-module.exports = user;
+module.exports = User;
