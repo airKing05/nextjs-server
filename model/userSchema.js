@@ -5,22 +5,33 @@ const requireSchema = mongoose.Schema({
 })
 
 const userSchema = new mongoose.Schema({
-    name : requireSchema,
-    email: requireSchema, 
+    name : {
+        types: String,
+    },
+    email: {
+        types: String,
+    },
     phone: {
         types: Number,
-       
     },
-    password: requireSchema,
-    cPassword: requireSchema,
-    villageORcity : requireSchema,
-    district: requireSchema,
+    password: {
+        types: String,
+    },
+    cPassword: {
+        types: String,
+    },
+    villageORcity : {
+        types: String,
+    },
+    district: {
+        types: String,
+    },
     data: {
         type: Date,
         default: Date.now
     }
 });
 
-const User = mongoose.model('user', userSchema);
+const User = mongoose.model('User', userSchema);
 
 module.exports = User;
