@@ -2,6 +2,7 @@ const express = require('express');
 const route = express.Router();
 const User = require('../model/userSchema');
 const { body, validationResult } = require('express-validator');  // input fields verification
+const bcrypt = require('bcryptjs');    // password hashing
 
 
 
@@ -37,7 +38,7 @@ route.post('/auth',
         try {
             // checking the db to avoid multiple entries 
             const userExist = await User.findOne({email: email})
-            console.log(userExist)
+         
             if(userExist){
                 return res.status(500).json({message: "email already exist"}) 
                 
@@ -48,10 +49,26 @@ route.post('/auth',
                 return res.status(400).json({message: "password should be same in both the fields"}) 
              }
             else{
-
+               
                 // if every things okay then save user into db
+
+                // password hashing 
+                const salt = await bcrypt.genSalt(10);
+                const hashedPassword = await bcrypt.hash(password, salt);
+                console.log("pass", hashedPassword)
+                const hashedCPassword = await bcrypt.hash(cPassword, salt);
+                console.log("Cpass", hashedCPassword)
                 const user = new User(req.body)
-                const userRegistered = await user.save();
+                const userRegistered = await user.save({
+                    name: name, 
+                    email: email,
+                    phone: phone, 
+                    villageORcity: villageORcity, 
+                    district: district, 
+                    password: hashedPassword, 
+                    cPassword: hashedCPassword
+                });
+                console.log(userRegistered)
                 if (userRegistered){
                     return res.status(201).json({message: "new user registered successfully"})
                 }
