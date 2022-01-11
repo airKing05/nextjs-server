@@ -55,11 +55,13 @@ route.post('/auth',
                 // password hashing 
                 const salt = await bcrypt.genSalt(10);
                 const hashedPassword = await bcrypt.hash(password, salt);
-                console.log("pass", hashedPassword)
                 const hashedCPassword = await bcrypt.hash(cPassword, salt);
-                console.log("Cpass", hashedCPassword)
-                const user = new User(req.body)
-                const userRegistered = await user.save({
+               
+                
+                // not able to save hashed pass. using save()
+                // const user = new User(req.body)
+                // const userRegistered = await user.save
+                const userRegistered = await User.create({
                     name: name, 
                     email: email,
                     phone: phone, 
@@ -68,9 +70,12 @@ route.post('/auth',
                     password: hashedPassword, 
                     cPassword: hashedCPassword
                 });
-                console.log(userRegistered)
+                
                 if (userRegistered){
-                    return res.status(201).json({message: "new user registered successfully"})
+                    return res.status(201).json({
+                        message: "new user registered successfully", 
+                        user: userRegistered
+                    })
                 }
                 else{
                     return res.status(500).json({message: "unable to registered new user"})
