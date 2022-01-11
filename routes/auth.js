@@ -3,6 +3,7 @@ const route = express.Router();
 const User = require('../model/userSchema');
 const { body, validationResult } = require('express-validator');  // input fields verification
 const bcrypt = require('bcryptjs');    // password hashing
+const jwt = require('jsonwebtoken');   // for use auth...
 
 
 
@@ -11,6 +12,8 @@ route.get('/', (req, res) => {
     res.send("this is get request of the user")
 })
 
+
+// user registration api 
 route.post('/auth',
     [
         // arr is for validation required fields
@@ -61,7 +64,7 @@ route.post('/auth',
                 // not able to save hashed pass. using save()
                 // const user = new User(req.body)
                 // const userRegistered = await user.save
-                const userRegistered = await User.create({
+                let userRegistered = await User.create({
                     name: name, 
                     email: email,
                     phone: phone, 
@@ -70,11 +73,19 @@ route.post('/auth',
                     password: hashedPassword, 
                     cPassword: hashedCPassword
                 });
-                
+                const data = {
+                    user: {
+                        id: User._id
+                    }
+                }
+                const authToken = jwt.sign(data, 'JWT_SECRET_KEY');
+                console.log(authToken);
+
                 if (userRegistered){
                     return res.status(201).json({
                         message: "new user registered successfully", 
-                        user: userRegistered
+                        user: userRegistered,
+                        token: authToken
                     })
                 }
                 else{
@@ -88,5 +99,9 @@ route.post('/auth',
         }
         
     })
+
+
+
+    // user-login api
 
 module.exports = route;
