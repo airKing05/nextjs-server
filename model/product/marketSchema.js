@@ -7,11 +7,11 @@ const requiredString = {
 
 const item_priceSchema = new mongoose.Schema({
     date: {
-        type: String,
+        type: Date,
         default: Date.now
     },
-    minimum_price: requiredString,
-    maximum_price: requiredString
+    minimum_price: { type: Number, required: true},
+    maximum_price: { type: Number, required: true}
 });
 
 const category_itemsSchema = new mongoose.Schema({
@@ -19,13 +19,13 @@ const category_itemsSchema = new mongoose.Schema({
     item_image: [{
         image_url: requiredString
     }],
-    item_price: [item_priceSchema]
+    item_price: [{type: mongoose.Types.ObjectId, ref: 'Price'}]
 });
 
 // product's all the category list will be here
 const product_category_Schema = new mongoose.Schema({
     category_name : requiredString,
-    category_items : [category_itemsSchema]
+    category_items : [{type: mongoose.Types.ObjectId, ref: 'Item'}]
  });
 
 
@@ -36,10 +36,12 @@ const marketSchema = new mongoose.Schema({
         city: requiredString,
         state: requiredString
     },
-    // product_category: [{type: mongoose.Types.ObjectId, ref: 'Product'}]
+    product_category: [{type: mongoose.Types.ObjectId, ref: 'Product'}]
 });
 
-const Product = mongoose.model('Product', product_category_Schema);
-const Market = mongoose.model('MARKET', marketSchema);
+const Price = mongoose.model('Price', item_priceSchema)
+const Item = mongoose.model('Item', category_itemsSchema)
+const Category = mongoose.model('Category', product_category_Schema);
+const Market = mongoose.model('Market', marketSchema);
 
-module.exports = Market;
+module.exports = Price;
