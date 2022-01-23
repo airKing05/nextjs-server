@@ -7,7 +7,7 @@ const requiredString = {
 
 const item_priceSchema = new mongoose.Schema({
     date: {
-        type: Date,
+        type: String,
         default: Date.now
     },
     minimum_price: requiredString,
@@ -30,7 +30,7 @@ const product_category_nameSchema = new mongoose.Schema({
 const productSchema = new mongoose.Schema({
     city: requiredString,
     state: requiredString,
-    mandi_name: requiredString,
+    market_name: requiredString,
     product_category: [product_category_nameSchema]
 });
 
