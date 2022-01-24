@@ -1,4 +1,4 @@
-const Price = require('../../model/product/marketSchema');
+const Price = require('../../model/product/PriceSchema');
 
 const addPrice = async (req, res) => {
     try {

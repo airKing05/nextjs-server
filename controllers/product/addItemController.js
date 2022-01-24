@@ -1,4 +1,4 @@
-const Item = require('../../model/product/marketSchema');
+const Item = require('../../model/product/ItemSchema');
 
 // add product function 
 const addItem = async (req, res) => {

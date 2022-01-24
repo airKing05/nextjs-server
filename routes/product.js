@@ -7,6 +7,7 @@ const addItemController = require('../controllers/product/addItemController');
 const addPriceController = require('../controllers/product/addPriceController');
 const getProductController = require('../controllers/product/getProductController')
 
+
 route.get('/get-product', getProductController);
 route.post('/market-details',  addMarketController);
 route.post('/product-category-details', addCategoryController);
