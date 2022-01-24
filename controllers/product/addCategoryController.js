@@ -1,20 +1,28 @@
-const Category = require('../../model/product/CategorySchema');
+const Category = require('../../model/product/categorySchema');
+const Market = require('../../model/product/marketSchema');
 
 // add product function 
 const addCategory = async (req, res) => {
-   
+    // find market by id
+    const market = await Market.findOne({ _id: req.params.marketID })
 
-    try {
-        const category = await Category.create(req.body);
-        if (!category){
-            res.status(400).json({message: 'unable to save Category details to Database'});
+    // creating the category of the products
+    const category = new Category();
+    category.category_name = req.body.category_name;
+    category.market = market._id;
+    await category.save((err, result) => {
+        if (err) {
+            res.status(400).json({ message: 'unable to save category details to Database', error: err });
         }
-        else{
-            res.status(201).json({message: 'Category successfully cerated to the Database'});
+        else {
+            res.send(result);
         }
-    } catch (error) {
-        res.status(500).send("internal server error")
-        console.log("Error==>", error)
-    }    
-};
- module.exports = addCategory;
+    })
+
+    // now associated market with category by push category id into the market
+    market.product_category.push(category._id);
+    await market.save();
+
+    res.send(category);
+}
+module.exports = addCategory;
