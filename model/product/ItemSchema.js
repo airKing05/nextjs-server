@@ -6,9 +6,8 @@ const category_itemsSchema = new mongoose.Schema({
     item_image: [{
         image_url: requiredString
     }],
-    item_price: [{type: mongoose.Types.ObjectId, ref: 'Price'}]
+    item_price: [{type: mongoose.Schema.Types.ObjectId, ref: 'Price'}]
 });
-
 
 const Item = mongoose.model('Item', category_itemsSchema);
 

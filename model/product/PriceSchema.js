@@ -7,7 +7,8 @@ const item_priceSchema = new mongoose.Schema({
         default: Date.now
     },
     minimum_price: { type: Number, required: true},
-    maximum_price: { type: Number, required: true}
+    maximum_price: { type: Number, required: true},
+    item: {type: mongoose.Schema.Types.ObjectId}
 });
 
 const Price = mongoose.model('Price', item_priceSchema)
