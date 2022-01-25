@@ -17,7 +17,9 @@ const addPrice = async (req, res) => {
             else{
                 res.status(201).json({message: 'Price successfully cerated to the Database'});
             }
-        })
+        });
+
+        // pushing specific Price model ID to a particular Item model 
         item.item_price.push(price._id);
         await item.save();
 

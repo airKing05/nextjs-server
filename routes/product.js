@@ -8,15 +8,19 @@ const priceController = require('../controllers/product/priceController');
 const getProductController = require('../controllers/product/getProductController')
 
 
-// POST-GET details about products required fields API
-route.get('/get-product', getProductController);
+// GET- find details about products required fields API
+
+// this get api belong to the old model
+route.get('/get-product', getProductController);   // ignore it while reading the code
+
+// this is new style of all the get api
 route.get('/market-details',  marketController.getMarket);
 route.get('/product-item-details', itemController.getItem);
 
 // POST-add details about products required fields API
 route.post('/market-details',  marketController.addMarket);
 route.post('/:marketID/product-category-details', categoryController);
-route.post('/product-item-details', itemController.addItem);
+route.post('/:categoryID/product-item-details', itemController.addItem);
 route.post('/:itemID/product-Price-details', priceController);
 
 module.exports = route;

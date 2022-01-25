@@ -10,7 +10,7 @@ const marketSchema = new mongoose.Schema({
         city: requiredString,
         state: requiredString
     },
-    product_category: [{type: mongoose.Types.ObjectId, ref: 'Category', required: "field in required of category"}]
+    product_category: [{type: mongoose.Types.ObjectId, ref: 'Category', required: "field in required of Category"}]
 });
 
 

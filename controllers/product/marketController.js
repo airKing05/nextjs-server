@@ -1,4 +1,5 @@
 const Market = require('../../model/product/marketSchema');
+const Category = require('../../model/product/categorySchema');
 
 // add product function 
 const addMarket = async (req, res) => {
@@ -24,7 +25,7 @@ const addMarket = async (req, res) => {
 // get market details
 const getMarket = async (req, res) => {
     try {
-        const market = await Market.find().populate("product_category")
+        const market = await Market.find().populate({path: "product_category", populate: "category_items"});
         if (!market) {
             res.status(404).json({ message: 'did not get any market data', error: err });
         }

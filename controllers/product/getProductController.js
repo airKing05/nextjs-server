@@ -1,6 +1,6 @@
 const Product = require('../../model/productSchema');
 // get product 
-
+// this  API is belonging form old model of productSchema 
 const getProduct = async (req, res) => {
     try {
         const product = await Product.find();
