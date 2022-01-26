@@ -23,4 +23,8 @@ route.post('/:marketID/product-category-details', categoryController);
 route.post('/:categoryID/product-item-details', itemController.addItem);
 route.post('/:itemID/product-Price-details', priceController);
 
+// Delete- remove details about product from the details 
+route.delete('/market-details/:marketID', marketController.removeMarket);
+
+
 module.exports = route;

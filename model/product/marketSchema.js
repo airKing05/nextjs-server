@@ -10,8 +10,12 @@ const marketSchema = new mongoose.Schema({
         city: requiredString,
         state: requiredString
     },
-    product_category: [{type: mongoose.Types.ObjectId, ref: 'Category', required: "field in required of Category"}]
-});
+    product_category: [{
+        type: mongoose.Types.ObjectId, 
+        ref: 'Category', 
+        required: "field in required of Category"
+    }]
+}, { timestamps: true });
 
 
 const Market = mongoose.model('Market', marketSchema);

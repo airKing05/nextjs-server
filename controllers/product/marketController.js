@@ -25,7 +25,7 @@ const addMarket = async (req, res) => {
 // get market details
 const getMarket = async (req, res) => {
     try {
-        const market = await Market.find().populate({path: "product_category", populate: "category_items"});
+        const market = await Market.find().populate({ path: "product_category", populate: { path: "category_items", populate: "item_price" } });
         if (!market) {
             res.status(404).json({ message: 'did not get any market data', error: err });
         }
@@ -38,4 +38,24 @@ const getMarket = async (req, res) => {
     }
 };
 
-module.exports = { addMarket, getMarket };
+
+
+// delete market details
+const removeMarket = async (req, res) => {
+    try {
+        const market = await Market.findByIdAndDelete({ _id: req.params.marketID }, (err, result) => {
+            if (err) {
+               console.log(err);
+            }
+            res.status(400).json({ message: 'market successfully deleted', result: market })
+        });
+
+    } catch (error) {
+        res.status(500).send("internal server error")
+        console.log("Error==>", error)
+    }
+}
+
+module.exports = { addMarket, getMarket, removeMarket };
+
+
