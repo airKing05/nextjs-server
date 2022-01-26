@@ -6,7 +6,8 @@ const addItem = async (req, res) => {
     try {
         const category = await Category.findOne({_id: req.params.categoryID});
         const item = Item(req.body);
-        item.item_name = req.body.item_name;
+        // item.item_name = req.body.item_name;
+        // item.item_image = []
         item.category = category._id;
         await item.save((err, result) => {
             if (err) {

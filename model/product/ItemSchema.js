@@ -3,9 +3,9 @@ const requiredString = require('../requriedString');
 
 const category_itemsSchema = new mongoose.Schema({
     item_name: requiredString,
-    // item_image: [{
-    //     image_url: requiredString
-    // }],
+    item_image: [{
+         image_url: requiredString
+    }],
     category: {
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'Category', 
