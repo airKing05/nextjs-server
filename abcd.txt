@@ -2,7 +2,7 @@ some docs releted to the projects
 
   some problem occured 
   1 update api me dusri bar same same hi id me update krnae me Error
-  2 delete api me delete krne ke baad me error
+  2 delete api me delete krne ke baad me error // deleted already
   3 post me jb item_price, category_items, category add krne ke baad error
   4 .env file me problem
   5 satus code bhi kuch jgh pr galat ho skte hai 
