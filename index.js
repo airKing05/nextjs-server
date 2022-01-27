@@ -11,6 +11,7 @@ const PORT = 3030;
 
 app.use(express.json())
 app.use('/api/user', require('./routes/auth'));
+app.use('/api/product', require('./routes/product'));
 require('./db/connect');
 
 
