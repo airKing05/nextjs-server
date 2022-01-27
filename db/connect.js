@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const DATABASE = 'mongodb+srv://anilraj5:anilraj5@cluster0.l3lkl.mongodb.net/krashak01?retryWrites=true&w=majority'
+const DATABASE = process.env.DATABASE;
 
 mongoose.connect(DATABASE)
         .then((res) => console.log('server is connected to the database'))
