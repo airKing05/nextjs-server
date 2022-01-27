@@ -39,23 +39,43 @@ const getMarket = async (req, res) => {
 };
 
 
+// update market details
+ const updateMarket = async (req, res) => {
+     try {
+         const market = await Market.findByIdAndUpdate({ _id: req.params.marketID }, req.body, (err, result) => {
+            if (err) {
+                res.status(400).json({ message: 'not able to update market details', error: err})
+               console.log(err);
+            }
+            res.status(200).json({ message: 'market details updated successfully',})
+         });
+
+     } catch (error) {
+        res.status(500).send("internal server error")
+        console.log("Error==>", error)
+     }
+ }
+
+
 
 // delete market details
 const removeMarket = async (req, res) => {
     try {
         const market = await Market.findByIdAndDelete({ _id: req.params.marketID }, (err, result) => {
             if (err) {
+                res.status(400).json({ message: 'not able to delete market', error: err})
                console.log(err);
             }
-            res.status(400).json({ message: 'market successfully deleted', result: market })
+            res.status(200).json({ message: 'market successfully deleted',})
+
         });
 
     } catch (error) {
-        res.status(500).send("internal server error")
+        
         console.log("Error==>", error)
     }
 }
 
-module.exports = { addMarket, getMarket, removeMarket };
+module.exports = { addMarket, getMarket, updateMarket, removeMarket };
 
 

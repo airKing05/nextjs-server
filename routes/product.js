@@ -23,6 +23,10 @@ route.post('/:marketID/product-category-details', categoryController);
 route.post('/:categoryID/product-item-details', itemController.addItem);
 route.post('/:itemID/product-Price-details', priceController);
 
+// PUT - update details about products form the details
+route.put('/market-details/:marketID', marketController.updateMarket);
+
+
 // Delete- remove details about product from the details 
 route.delete('/market-details/:marketID', marketController.removeMarket);
 
