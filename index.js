@@ -1,10 +1,14 @@
 const dotenv = require('dotenv');
 const express = require('express');
+const path = require('path');
+
 const app = express();
 
+// console.log(path)
 
 // for the enviormental variable
 require('dotenv').config();
+// {path: path.join(__dirname, '.config/.env')}   >>> need to set in side the config()
 const PORT = process.env.PORT;
 
 app.use(express.json())
