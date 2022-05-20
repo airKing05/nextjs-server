@@ -7,8 +7,10 @@ const app = express();
 // console.log(path)
 
 // for the enviormental variable
-require('dotenv').config();
-// {path: path.join(__dirname, '.config/.env')}   >>> need to set in side the config()
+//require('dotenv').config();
+// {path: path.join(__dirname, '.config/.env')}   //>>> need to set in side the config()
+
+dotenv.config({ path: './config.env' });
 const PORT = process.env.PORT;
 
 app.use(express.json())
